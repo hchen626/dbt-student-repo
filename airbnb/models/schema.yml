@@ -34,21 +34,37 @@ models:
                         'Hotel room']
 
   - name: dim_hosts_cleansed
+    config:
+      contract:
+        enforce: true
     columns:
       - name: host_id
+        data_type: integer
         data_tests:
           - not_null
           - unique
 
       - name: host_name
+        data_type: string
         data_tests:
           - not_null
 
       - name: is_superhost
+        data_type: string
         data_tests:
         - accepted_values:
             arguments:
               values: ['t', 'f']
+
+      - name: updated_at
+        data_type: timestamp
+        data_tests:
+          - not_null
+      
+      - name: created_at
+        data_type: timestamp
+        data_tests:
+          - not_null
 
   - name: fct_reviews
     columns:
