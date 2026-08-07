@@ -34,18 +34,20 @@ models:
                         'Hotel room']
 
       - name: minimum_nights
-        description: Minimum nights required to book the listing
+        description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
         data_tests:
           - not_null
           - positive_values
 
   - name: dim_hosts_cleansed
+    description: Cleansed table for the Airbnb hosts
     config:
       contract:
         enforce: true
 
     columns:
       - name: host_id
+        description: The id of the host. This is the primary key.
         data_type: integer
         constraints:
           - type: not_null
@@ -53,11 +55,13 @@ models:
           - unique
 
       - name: host_name
+        description: The name of the host
         data_type: string
         constraints:
           - type: not_null
 
       - name: is_superhost
+        description: Defines whether the hosts is a superhost.
         data_type: string
         data_tests:
         - accepted_values:
