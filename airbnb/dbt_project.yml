@@ -32,21 +32,20 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 on-run-start:
   - "CREATE TABLE IF NOT EXISTS {{ target.schema }}.audit_log (
-      model_name STRING, 
-      run_timestamp TIMESTAMP 
+      model_name STRING,
+      run_timestamp TIMESTAMP
     )"
 
 models:
   airbnb:
     +grants:
       select: ["transform", "reporter"]
-    +post-hook: 
+    +post-hook:
       - "INSERT INTO {{ target.schema }}.audit_log (model_name, run_timestamp) VALUES ('{{ this.name }}', current_timestamp)"
     +materialized: view
     dim:
       +materialized: table
     src:
       +materialized: ephemeral
-
 data_tests:
   +store_failures: true
