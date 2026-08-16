@@ -51,3 +51,6 @@ models:
       +tags: ['fact']
 data_tests:
   +store_failures: true
+
+vars:
+  user_name: default_user_name_for_this_project
