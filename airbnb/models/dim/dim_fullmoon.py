@@ -11,7 +11,7 @@ def model(dbt, session):
         materialized = "table",
         python_version="3.11",
         packages = ["holidays", "pandas", "pyarrow"],
-        # enabled=False # We add this line in the Model Lifecycle / Disabling Models section
+        enabled=False # We add this line in the Model Lifecycle / Disabling Models section
     )
 
     orders_df = dbt.ref("seed_full_moon_dates")
